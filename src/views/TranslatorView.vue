@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import Header from '../components/Header.vue';
+import ConversationalAgent from '../components/ConversationalAgent.vue';
 
 const sourceText = ref('');
 const translatedText = ref('');
@@ -9,6 +10,7 @@ const targetLanguage = ref('es');
 const translationMode = ref('professional');
 const isTranslating = ref(false);
 const showCopied = ref(false);
+const activeTab = ref<'translator' | 'conversation'>('translator');
 
 const languages = [
   // Idiomas principales
@@ -151,175 +153,221 @@ const translate = async () => {
             </span>
           </h1>
           <p class="text-lg text-blue-200/80 font-display tracking-wide">
-            Professional-grade translation with context awareness
+            Professional-grade translation with context awareness and multilingual conversations
           </p>
         </div>
 
-        <!-- Translation Mode Selector -->
-        <div class="translation-modes-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div v-for="mode in translationModes" 
-               :key="mode.id"
-               tabindex="0"
-               @keyup.enter="translationMode = mode.id"
-               @click="translationMode = mode.id"
-               class="translation-mode-card group touch-manipulation"
-               :class="[
-                 translationMode === mode.id 
-                   ? 'selected-mode' 
-                   : ''
-               ]">
-            <div class="flex flex-col items-center gap-2 justify-center h-full">
-              <svg class="w-8 h-8 sm:w-7 sm:h-7 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="mode.icon" />
+        <!-- Tab Navigation -->
+        <div class="flex justify-center mb-8">
+          <div class="bg-slate-800/50 rounded-xl p-1 border border-white/10">
+            <button
+              @click="activeTab = 'translator'"
+              :class="[
+                'px-6 py-3 rounded-lg font-medium transition-all duration-300',
+                activeTab === 'translator'
+                  ? 'bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-lg'
+                  : 'text-blue-200/80 hover:text-white hover:bg-slate-700/50'
+              ]"
+            >
+              <div class="flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                </svg>
+                Text Translator
+              </div>
+            </button>
+            <button
+              @click="activeTab = 'conversation'"
+              :class="[
+                'px-6 py-3 rounded-lg font-medium transition-all duration-300',
+                activeTab === 'conversation'
+                  ? 'bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-lg'
+                  : 'text-blue-200/80 hover:text-white hover:bg-slate-700/50'
+              ]"
+            >
+              <div class="flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+                AI Conversation
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Content based on active tab -->
+        <div v-if="activeTab === 'translator'">
+          <!-- Translation Mode Selector -->
+          <div class="translation-modes-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div v-for="mode in translationModes" 
+                 :key="mode.id"
+                 tabindex="0"
+                 @keyup.enter="translationMode = mode.id"
+                 @click="translationMode = mode.id"
+                 class="translation-mode-card group touch-manipulation"
+                 :class="[
+                   translationMode === mode.id 
+                     ? 'selected-mode' 
+                     : ''
+                 ]">
+              <div class="flex flex-col items-center gap-2 justify-center h-full">
+                <svg class="w-8 h-8 sm:w-7 sm:h-7 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="mode.icon" />
+                </svg>
+                <h3 class="text-base sm:text-lg font-semibold text-blue-200 group-hover:text-white transition-colors text-center">{{ mode.name }}</h3>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-300 group-hover:text-slate-200 transition-colors text-center mt-2">{{ mode.description }}</p>
+            </div>
+          </div>
+
+          <!-- Translation Interface -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Source Text -->
+            <div class="space-y-4">
+              <div class="flex justify-between items-center">
+                <div class="language-select-container flex flex-col gap-2 w-full">
+                  <div class="relative w-full">
+                    <select v-model="sourceLanguage"
+                      class="custom-select w-full text-base sm:text-lg font-medium bg-slate-800 border border-blue-500 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 appearance-none pr-10"
+                      aria-label="Select source language">
+                      <optgroup label="Main Languages">
+                        <option v-for="lang in languages.filter(l => !l.experimental)" :key="lang.code" :value="lang.code">
+                          {{ lang.name }} ({{ lang.nativeName }})
+                        </option>
+                      </optgroup>
+                      <optgroup label="Experimental Languages">
+                        <option v-for="lang in languages.filter(l => l.experimental)" :key="lang.code" :value="lang.code">
+                          {{ lang.name }} ({{ lang.nativeName }})
+                        </option>
+                      </optgroup>
+                    </select>
+                    <span class="pointer-events-none absolute right-4 top-1/2 transform -translate-y-1/2 text-blue-300">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </span>
+                  </div>
+                </div>
+                <button @click="clearText" 
+                        class="group text-slate-400 transition-colors p-2 rounded-lg bg-transparent min-h-[44px] min-w-[44px] touch-manipulation shadow outline-none focus:ring-0"
+                        title="Clear text" aria-label="Clear text">
+                  <svg class="w-5 h-5 transition-colors group-hover:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </button>
+              </div>
+              <div class="relative w-full">
+                <textarea
+                  v-model="sourceText"
+                  class="w-full h-32 sm:h-40 md:h-64 bg-slate-800 border border-blue-500 rounded-lg p-4 text-white resize-none focus:outline-none focus:ring-2 focus:ring-cyan-400 text-base sm:text-lg shadow translation-input-area"
+                  placeholder="Enter text to translate..."
+                  aria-label="Source text"
+                ></textarea>
+                <button
+                  v-if="sourceText"
+                  @click="clearText"
+                  class="absolute top-1/2 right-4 -translate-y-1/2 group text-slate-400 transition-colors rounded-lg bg-[#232a3a] p-2 min-h-[36px] min-w-[36px] flex items-center justify-center shadow hover:bg-blue-900/40 hover:text-cyan-400 focus:outline-none"
+                  title="Clear text" aria-label="Clear text"
+                  tabindex="0"
+                >
+                  <svg class="w-5 h-5 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Translated Text -->
+            <div class="space-y-4">
+              <div class="flex justify-between items-center">
+                <div class="flex flex-col gap-2 w-full">
+                  <div class="relative w-full">
+                    <select v-model="targetLanguage"
+                      class="custom-select w-full text-base sm:text-lg font-medium bg-slate-800 border border-blue-500 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 appearance-none pr-10"
+                      aria-label="Select target language">
+                      <optgroup label="Main Languages">
+                        <option v-for="lang in languages.filter(l => !l.experimental)" :key="lang.code" :value="lang.code">
+                          {{ lang.name }} ({{ lang.nativeName }})
+                        </option>
+                      </optgroup>
+                      <optgroup label="Experimental Languages">
+                        <option v-for="lang in languages.filter(l => l.experimental)" :key="lang.code" :value="lang.code">
+                          {{ lang.name }} ({{ lang.nativeName }})
+                        </option>
+                      </optgroup>
+                    </select>
+                    <span class="pointer-events-none absolute right-4 top-1/2 transform -translate-y-1/2 text-blue-300">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </span>
+                  </div>
+                </div>
+                <button @click="copyToClipboard" 
+                        class="group text-slate-400 transition-colors p-2 rounded-lg bg-transparent relative min-h-[44px] min-w-[44px] touch-manipulation shadow outline-none focus:ring-0"
+                        title="Copy translation" aria-label="Copy translation">
+                  <svg class="w-5 h-5 transition-colors group-hover:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                  </svg>
+                  <span v-if="showCopied" 
+                        class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-2 py-1 rounded text-sm whitespace-nowrap">
+                    Copied!
+                  </span>
+                </button>
+              </div>
+              <div class="relative w-full">
+                <div 
+                  class="translation-result-area w-full h-32 sm:h-40 md:h-64 p-4 text-white overflow-y-auto text-base sm:text-lg"
+                  tabindex="0"
+                  aria-label="Translation result"
+                >
+                  <div v-if="isTranslating" class="flex items-center justify-center h-full">
+                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+                  </div>
+                  <div v-else>
+                    {{ translatedText || 'Translation will appear here...' }}
+                  </div>
+                </div>
+                <button
+                  v-if="translatedText"
+                  @click="copyToClipboard"
+                  class="absolute top-1/2 right-4 -translate-y-1/2 group text-slate-400 transition-colors rounded-lg bg-[#232a3a] p-2 min-h-[36px] min-w-[36px] flex items-center justify-center shadow hover:bg-blue-900/40 hover:text-cyan-400 focus:outline-none"
+                  title="Copy translation" aria-label="Copy translation"
+                  tabindex="0"
+                >
+                  <svg class="w-5 h-5 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                  </svg>
+                  <span v-if="showCopied" class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-2 py-1 rounded text-sm whitespace-nowrap">Copied!</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="mt-6 flex justify-center items-center gap-4">
+            <button
+              @click="swapLanguages"
+              class="p-3 bg-slate-800/50 text-white rounded-lg hover:bg-slate-700/50 transition-colors min-h-[44px] min-w-[44px] touch-manipulation"
+              :disabled="!sourceText"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
               </svg>
-              <h3 class="text-base sm:text-lg font-semibold text-blue-200 group-hover:text-white transition-colors text-center">{{ mode.name }}</h3>
-            </div>
-            <p class="text-xs sm:text-sm text-slate-300 group-hover:text-slate-200 transition-colors text-center mt-2">{{ mode.description }}</p>
+            </button>
+
+            <button
+              @click="translate"
+              :disabled="!canTranslate"
+              class="px-8 py-3 bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-lg font-medium
+                     transition-all duration-300 transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed
+                     disabled:hover:scale-100 disabled:active:scale-100 min-h-[44px] touch-manipulation"
+            >
+              <span v-if="isTranslating">Translating...</span>
+              <span v-else>Translate</span>
+            </button>
           </div>
         </div>
 
-        <!-- Translation Interface -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Source Text -->
-          <div class="space-y-4">
-            <div class="flex justify-between items-center">
-              <div class="language-select-container flex flex-col gap-2 w-full">
-                <div class="relative w-full">
-                  <select v-model="sourceLanguage"
-                    class="custom-select w-full text-base sm:text-lg font-medium bg-slate-800 border border-blue-500 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 appearance-none pr-10"
-                    aria-label="Select source language">
-                    <optgroup label="Main Languages">
-                      <option v-for="lang in languages.filter(l => !l.experimental)" :key="lang.code" :value="lang.code">
-                        {{ lang.name }} ({{ lang.nativeName }})
-                      </option>
-                    </optgroup>
-                    <optgroup label="Experimental Languages">
-                      <option v-for="lang in languages.filter(l => l.experimental)" :key="lang.code" :value="lang.code">
-                        {{ lang.name }} ({{ lang.nativeName }})
-                      </option>
-                    </optgroup>
-                  </select>
-                  <span class="pointer-events-none absolute right-4 top-1/2 transform -translate-y-1/2 text-blue-300">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-                  </span>
-                </div>
-              </div>
-              <button @click="clearText" 
-                      class="group text-slate-400 transition-colors p-2 rounded-lg bg-transparent min-h-[44px] min-w-[44px] touch-manipulation shadow outline-none focus:ring-0"
-                      title="Clear text" aria-label="Clear text">
-                <svg class="w-5 h-5 transition-colors group-hover:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-              </button>
-            </div>
-            <div class="relative w-full">
-              <textarea
-                v-model="sourceText"
-                class="w-full h-32 sm:h-40 md:h-64 bg-slate-800 border border-blue-500 rounded-lg p-4 text-white resize-none focus:outline-none focus:ring-2 focus:ring-cyan-400 text-base sm:text-lg shadow translation-input-area"
-                placeholder="Enter text to translate..."
-                aria-label="Source text"
-              ></textarea>
-              <button
-                v-if="sourceText"
-                @click="clearText"
-                class="absolute top-1/2 right-4 -translate-y-1/2 group text-slate-400 transition-colors rounded-lg bg-[#232a3a] p-2 min-h-[36px] min-w-[36px] flex items-center justify-center shadow hover:bg-blue-900/40 hover:text-cyan-400 focus:outline-none"
-                title="Clear text" aria-label="Clear text"
-                tabindex="0"
-              >
-                <svg class="w-5 h-5 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <!-- Translated Text -->
-          <div class="space-y-4">
-            <div class="flex justify-between items-center">
-              <div class="flex flex-col gap-2 w-full">
-                <div class="relative w-full">
-                  <select v-model="targetLanguage"
-                    class="custom-select w-full text-base sm:text-lg font-medium bg-slate-800 border border-blue-500 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 appearance-none pr-10"
-                    aria-label="Select target language">
-                    <optgroup label="Main Languages">
-                      <option v-for="lang in languages.filter(l => !l.experimental)" :key="lang.code" :value="lang.code">
-                        {{ lang.name }} ({{ lang.nativeName }})
-                      </option>
-                    </optgroup>
-                    <optgroup label="Experimental Languages">
-                      <option v-for="lang in languages.filter(l => l.experimental)" :key="lang.code" :value="lang.code">
-                        {{ lang.name }} ({{ lang.nativeName }})
-                      </option>
-                    </optgroup>
-                  </select>
-                  <span class="pointer-events-none absolute right-4 top-1/2 transform -translate-y-1/2 text-blue-300">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-                  </span>
-                </div>
-              </div>
-              <button @click="copyToClipboard" 
-                      class="group text-slate-400 transition-colors p-2 rounded-lg bg-transparent relative min-h-[44px] min-w-[44px] touch-manipulation shadow outline-none focus:ring-0"
-                      title="Copy translation" aria-label="Copy translation">
-                <svg class="w-5 h-5 transition-colors group-hover:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                </svg>
-                <span v-if="showCopied" 
-                      class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-2 py-1 rounded text-sm whitespace-nowrap">
-                  Copied!
-                </span>
-              </button>
-            </div>
-            <div class="relative w-full">
-              <div 
-                class="translation-result-area w-full h-32 sm:h-40 md:h-64 p-4 text-white overflow-y-auto text-base sm:text-lg"
-                tabindex="0"
-                aria-label="Translation result"
-              >
-                <div v-if="isTranslating" class="flex items-center justify-center h-full">
-                  <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
-                </div>
-                <div v-else>
-                  {{ translatedText || 'Translation will appear here...' }}
-                </div>
-              </div>
-              <button
-                v-if="translatedText"
-                @click="copyToClipboard"
-                class="absolute top-1/2 right-4 -translate-y-1/2 group text-slate-400 transition-colors rounded-lg bg-[#232a3a] p-2 min-h-[36px] min-w-[36px] flex items-center justify-center shadow hover:bg-blue-900/40 hover:text-cyan-400 focus:outline-none"
-                title="Copy translation" aria-label="Copy translation"
-                tabindex="0"
-              >
-                <svg class="w-5 h-5 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                </svg>
-                <span v-if="showCopied" class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-2 py-1 rounded text-sm whitespace-nowrap">Copied!</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="mt-6 flex justify-center items-center gap-4">
-          <button
-            @click="swapLanguages"
-            class="p-3 bg-slate-800/50 text-white rounded-lg hover:bg-slate-700/50 transition-colors min-h-[44px] min-w-[44px] touch-manipulation"
-            :disabled="!sourceText"
-          >
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-            </svg>
-          </button>
-
-          <button
-            @click="translate"
-            :disabled="!canTranslate"
-            class="px-8 py-3 bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-lg font-medium
-                   transition-all duration-300 transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed
-                   disabled:hover:scale-100 disabled:active:scale-100 min-h-[44px] touch-manipulation"
-          >
-            <span v-if="isTranslating">Translating...</span>
-            <span v-else>Translate</span>
-          </button>
+        <!-- Conversational Agent Tab -->
+        <div v-else-if="activeTab === 'conversation'">
+          <ConversationalAgent />
         </div>
       </div>
     </div>
@@ -449,4 +497,4 @@ textarea,
 .translation-result-area {
   padding-right: 3rem !important;
 }
-</style> 
+</style>
