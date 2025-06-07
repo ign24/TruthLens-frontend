@@ -11,6 +11,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/translator',
     name: 'translator',
     component: () => import('../views/TranslatorView.vue')
+  },
+  {
+    path: '/voice-assistant',
+    name: 'voice-assistant',
+    component: () => import('../views/VoiceAssistantView.vue')
   }
 ]
 
@@ -19,4 +24,4 @@ const router = createRouter({
   routes
 })
 
-export default router 
+export default router

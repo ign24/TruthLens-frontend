@@ -449,8 +449,9 @@ onUnmounted(() => {
 <style scoped>
 .voice-assistant-container {
   position: fixed;
-  bottom: 6rem;
-  right: 2rem;
+  bottom: 2rem;
+  right: 50%;
+  transform: translateX(50%);
   z-index: 50;
   display: flex;
   flex-direction: column;
@@ -749,8 +750,9 @@ onUnmounted(() => {
 /* Responsive Design */
 @media (max-width: 768px) {
   .voice-assistant-container {
-    bottom: 8rem;
-    right: 1rem;
+    bottom: 2rem;
+    right: 50%;
+    transform: translateX(50%);
   }
   
   .voice-button-wrapper {
