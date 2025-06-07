@@ -8,7 +8,6 @@ const showHelp = ref(false);
 const links = [
   { name: 'Analyze', href: '/' },
   { name: 'Translator Pro', href: '/translator' },
-  { name: 'Voice Assistant', href: '/voice-assistant' },
   { name: 'Docs', href: 'https://truthlens-backend-production.up.railway.app/docs', external: true }
 ];
 
@@ -43,8 +42,7 @@ const toggleHelp = () => {
             <RouterLink
               v-else
               :to="link.href"
-              class="text-sm text-blue-200/80 hover:text-white transition-colors duration-200 router-link"
-              active-class="text-cyan-400 font-medium"
+              class="text-sm text-blue-200/80 hover:text-white transition-colors duration-200"
             >
               {{ link.name }}
             </RouterLink>
@@ -91,25 +89,3 @@ const toggleHelp = () => {
     </div>
   </div>
 </template>
-
-<style scoped>
-.router-link {
-  position: relative;
-}
-
-.router-link.router-link-active {
-  color: #22d3ee;
-  font-weight: 500;
-}
-
-.router-link.router-link-active::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(to right, #22d3ee, #3b82f6);
-  border-radius: 1px;
-}
-</style>
