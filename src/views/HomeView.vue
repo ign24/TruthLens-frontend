@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AnalysisForm from '../components/AnalysisForm.vue';
 import ChatBot from '../components/ChatBot.vue';
+import VoiceAssistant from '../components/VoiceAssistant.vue';
 import { useAnalysis } from '../composables/useAnalysis';
 import { ref } from 'vue';
 
@@ -31,4 +32,7 @@ async function handleAnalyze(text: string) {
     :article-text="currentArticleText"
     :analysis-result="result"
   />
-</template> 
+
+  <!-- Voice Assistant Component -->
+  <VoiceAssistant />
+</template>
