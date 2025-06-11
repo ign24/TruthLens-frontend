@@ -10,228 +10,357 @@
       </div>
 
       <div class="relative z-10 text-center max-w-6xl mx-auto">
-        <!-- Logo and Title -->
+        <!-- Logo -->
         <div class="mb-8">
           <img
             src="../assets/logo.png"
             alt="TruthLens Logo"
             class="h-20 w-auto mx-auto mb-6 animate-fade-in"
           />
-          <h1 class="text-7xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-cyan-300 via-blue-500 to-cyan-300 bg-clip-text text-transparent bg-[length:200%_200%] animate-gradient">
-            TruthLens
-          </h1>
-          <p class="text-2xl md:text-3xl text-blue-200/80 font-light mb-8 animate-fade-in-up">
-            AI-Powered News Analysis & Voice Assistant
-          </p>
-          <p class="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed animate-fade-in-up delay-200">
-            Detect bias, analyze credibility, and get instant insights with our advanced AI technology. 
-            Now featuring real-time voice conversations with Alex, your intelligent news analysis companion.
-          </p>
         </div>
 
-        <!-- CTA Buttons -->
-        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12 animate-fade-in-up delay-400">
-          <RouterLink
-            to="/analyze"
-            class="group relative px-8 py-4 bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/25 min-w-[200px]"
-          >
-            <span class="relative z-10">Start Analyzing</span>
-            <div class="absolute inset-0 bg-gradient-to-r from-cyan-300 to-blue-400 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </RouterLink>
-          
+        <!-- Main Headlines -->
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight animate-fade-in-up">
+          <span class="bg-gradient-to-r from-cyan-300 via-blue-500 to-cyan-300 bg-clip-text text-transparent bg-[length:200%_200%] animate-gradient">
+            TruthLens doesn't follow the headlines.
+          </span>
+          <br>
+          <span class="text-white">It questions them.</span>
+        </h1>
+
+        <p class="text-xl md:text-2xl text-blue-200/80 font-light mb-8 max-w-4xl mx-auto leading-relaxed animate-fade-in-up delay-200">
+          Uncover hidden bias. Spot emotional language. Detect fake and AI-generated content.
+        </p>
+
+        <!-- Primary CTA -->
+        <div class="mb-12 animate-fade-in-up delay-400">
           <button
             @click="scrollToDemo"
-            class="group px-8 py-4 border-2 border-cyan-400/50 text-cyan-300 rounded-xl font-semibold text-lg transition-all duration-300 hover:border-cyan-400 hover:bg-cyan-400/10 hover:scale-105 min-w-[200px]"
+            class="group relative px-10 py-5 bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-xl font-semibold text-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/25 min-w-[250px]"
           >
-            <span class="flex items-center justify-center gap-2">
-              <svg class="w-5 h-5 group-hover:animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 14.142M8 21l4-4H5a2 2 0 01-2-2V9a2 2 0 012-2h7l4-4v18z" />
+            <span class="relative z-10 flex items-center justify-center gap-3">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              Try Voice AI
+              Try the Demo
             </span>
+            <div class="absolute inset-0 bg-gradient-to-r from-cyan-300 to-blue-400 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </button>
         </div>
 
-        <!-- Stats -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto animate-fade-in-up delay-600">
-          <div class="text-center">
-            <div class="text-4xl font-bold text-cyan-400 mb-2">99.2%</div>
-            <div class="text-slate-300">Accuracy Rate</div>
-          </div>
-          <div class="text-center">
-            <div class="text-4xl font-bold text-blue-400 mb-2">35+</div>
-            <div class="text-slate-300">Languages Supported</div>
-          </div>
-          <div class="text-center">
-            <div class="text-4xl font-bold text-cyan-400 mb-2">Real-time</div>
-            <div class="text-slate-300">Voice Analysis</div>
-          </div>
+        <!-- Scroll Indicator -->
+        <div class="animate-bounce">
+          <svg class="w-6 h-6 text-cyan-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
         </div>
       </div>
+    </section>
 
-      <!-- Scroll Indicator -->
-      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
+    <!-- Interactive Demo Section -->
+    <section ref="demoSection" class="py-20 px-4 bg-gradient-to-r from-slate-900/50 to-slate-800/50">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold mb-4 bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
+            See TruthLens in Action
+          </h2>
+          <p class="text-xl text-slate-300">
+            Paste any news article and watch our AI analyze it in real-time
+          </p>
+        </div>
+
+        <!-- Demo Interface -->
+        <div class="bg-slate-800/50 rounded-2xl p-8 border border-white/10">
+          <div class="mb-6">
+            <textarea
+              v-model="demoText"
+              placeholder="Paste a news article here to see how TruthLens analyzes bias, credibility, and emotional tone..."
+              class="w-full h-32 bg-slate-900/50 border border-blue-500/50 rounded-lg p-4 text-white placeholder-blue-200/50 resize-none focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            ></textarea>
+          </div>
+
+          <div class="flex justify-center mb-8">
+            <button
+              @click="runDemo"
+              :disabled="!demoText.trim() || isDemoRunning"
+              class="px-8 py-3 bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-lg font-medium transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <span v-if="isDemoRunning" class="flex items-center gap-2">
+                <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                Analyzing...
+              </span>
+              <span v-else>Analyze with TruthLens</span>
+            </button>
+          </div>
+
+          <!-- Demo Results -->
+          <div v-if="showDemoResults" class="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-in">
+            <div class="bg-slate-900/50 rounded-xl p-6 border border-cyan-400/20">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-white">Bias Detection</h3>
+                  <p class="text-2xl font-bold text-red-400">{{ demoResults.bias }}%</p>
+                </div>
+              </div>
+              <p class="text-sm text-slate-300">Political bias detected in language patterns</p>
+            </div>
+
+            <div class="bg-slate-900/50 rounded-xl p-6 border border-cyan-400/20">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-white">Credibility</h3>
+                  <p class="text-2xl font-bold text-yellow-400">{{ demoResults.credibility }}%</p>
+                </div>
+              </div>
+              <p class="text-sm text-slate-300">Factual accuracy and source reliability</p>
+            </div>
+
+            <div class="bg-slate-900/50 rounded-xl p-6 border border-cyan-400/20">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-white">Emotional Tone</h3>
+                  <p class="text-2xl font-bold text-purple-400">{{ demoResults.emotion }}</p>
+                </div>
+              </div>
+              <p class="text-sm text-slate-300">Emotional manipulation detected</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Features Section -->
-    <section class="py-20 px-4 relative">
+    <section class="py-20 px-4">
       <div class="max-w-7xl mx-auto">
         <div class="text-center mb-16">
           <h2 class="text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
-            Powerful Features
+            Powerful AI Tools for Media Analysis
           </h2>
           <p class="text-xl text-slate-300 max-w-3xl mx-auto">
-            Advanced AI technology to help you navigate the complex world of news and information
+            Everything you need to navigate the complex world of modern media and information
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Feature 1: News Analysis -->
+          <!-- Text Analyzer -->
           <div class="group p-8 bg-slate-800/50 rounded-2xl border border-white/10 hover:border-cyan-400/50 transition-all duration-300 hover:transform hover:scale-105">
             <div class="w-16 h-16 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
             </div>
-            <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-cyan-300 transition-colors">News Analysis</h3>
+            <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-cyan-300 transition-colors">Text Analyzer</h3>
             <p class="text-slate-300 leading-relaxed">
-              Analyze articles for bias, credibility, and emotional tone. Get detailed breakdowns of factual accuracy and political leanings.
+              Detect bias, fake news percentage, and emotional tone in any article. Get detailed breakdowns of credibility and political leanings.
             </p>
           </div>
 
-          <!-- Feature 2: Voice AI Assistant -->
-          <div class="group p-8 bg-slate-800/50 rounded-2xl border border-white/10 hover:border-cyan-400/50 transition-all duration-300 hover:transform hover:scale-105">
-            <div class="w-16 h-16 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 14.142M8 21l4-4H5a2 2 0 01-2-2V9a2 2 0 012-2h7l4-4v18z" />
-              </svg>
-            </div>
-            <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-cyan-300 transition-colors">Voice AI Assistant</h3>
-            <p class="text-slate-300 leading-relaxed">
-              Talk to Alex, our intelligent voice assistant. Get instant explanations and insights through natural conversation.
-            </p>
-          </div>
-
-          <!-- Feature 3: Multilingual Support -->
+          <!-- Multilingual Translator -->
           <div class="group p-8 bg-slate-800/50 rounded-2xl border border-white/10 hover:border-cyan-400/50 transition-all duration-300 hover:transform hover:scale-105">
             <div class="w-16 h-16 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
               </svg>
             </div>
-            <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-cyan-300 transition-colors">Multilingual Support</h3>
+            <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-cyan-300 transition-colors">Multilingual Translator</h3>
             <p class="text-slate-300 leading-relaxed">
-              Analyze content in 35+ languages. Professional translation with context awareness and cultural adaptation.
+              Professional translation across 35+ languages with context awareness and cultural adaptation for accurate communication.
             </p>
           </div>
 
-          <!-- Feature 4: Real-time Processing -->
+          <!-- Image Fake Detector -->
           <div class="group p-8 bg-slate-800/50 rounded-2xl border border-white/10 hover:border-cyan-400/50 transition-all duration-300 hover:transform hover:scale-105">
             <div class="w-16 h-16 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
             </div>
-            <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-cyan-300 transition-colors">Real-time Processing</h3>
+            <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-cyan-300 transition-colors">Image Fake Detector</h3>
             <p class="text-slate-300 leading-relaxed">
-              Get instant results with our optimized AI models. Low-latency voice responses and rapid text analysis.
+              Advanced AI detection of manipulated images, deepfakes, and AI-generated visuals to verify authentic content.
             </p>
           </div>
 
-          <!-- Feature 5: Bias Detection -->
+          <!-- AI Text Detector -->
           <div class="group p-8 bg-slate-800/50 rounded-2xl border border-white/10 hover:border-cyan-400/50 transition-all duration-300 hover:transform hover:scale-105">
             <div class="w-16 h-16 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
               </svg>
             </div>
-            <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-cyan-300 transition-colors">Bias Detection</h3>
+            <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-cyan-300 transition-colors">AI Text Detector</h3>
             <p class="text-slate-300 leading-relaxed">
-              Identify political bias, emotional manipulation, and propaganda techniques with advanced NLP algorithms.
+              Identify AI-generated content with high accuracy. Distinguish between human and machine-written text across various formats.
             </p>
           </div>
 
-          <!-- Feature 6: Interactive Chat -->
-          <div class="group p-8 bg-slate-800/50 rounded-2xl border border-white/10 hover:border-cyan-400/50 transition-all duration-300 hover:transform hover:scale-105">
-            <div class="w-16 h-16 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-              </svg>
+          <!-- Clara Voice Assistant -->
+          <div class="group p-8 bg-slate-800/50 rounded-2xl border border-white/10 hover:border-cyan-400/50 transition-all duration-300 hover:transform hover:scale-105 md:col-span-2 lg:col-span-2">
+            <div class="flex items-start gap-6">
+              <div class="w-16 h-16 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 14.142M8 21l4-4H5a2 2 0 01-2-2V9a2 2 0 012-2h7l4-4v18z" />
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-cyan-300 transition-colors">Clara – Conversational Voice Assistant</h3>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                  Meet Clara, your intelligent voice companion. Have natural conversations about news analysis, get instant explanations, and explore insights through voice interaction in 35+ languages.
+                </p>
+                <button class="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg font-medium hover:scale-105 transition-transform duration-300">
+                  Talk to Clara
+                </button>
+              </div>
             </div>
-            <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-cyan-300 transition-colors">Interactive Chat</h3>
-            <p class="text-slate-300 leading-relaxed">
-              Ask questions about your analysis results. Get detailed explanations and recommendations from our AI assistant.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="py-20 px-4 bg-gradient-to-r from-slate-900/50 to-slate-800/50">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
+          See TruthLens in Action
+        </h2>
+        <p class="text-xl text-slate-300 mb-8">
+          Watch how TruthLens works in under 3 minutes
+        </p>
+        
+        <!-- Video Placeholder -->
+        <div class="relative bg-slate-800/50 rounded-2xl overflow-hidden border border-white/10 aspect-video">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center">
+              <div class="w-20 h-20 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform duration-300 cursor-pointer">
+                <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <p class="text-slate-300">Demo Video Coming Soon</p>
+              <p class="text-sm text-slate-400 mt-2">Experience TruthLens analysis in real-time</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- User Impact / Testimonials -->
+    <section class="py-20 px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
+            Trusted by Critical Thinkers
+          </h2>
+          <p class="text-xl text-slate-300">
+            See how TruthLens is helping people understand media better
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Testimonial 1 -->
+          <div class="bg-slate-800/50 rounded-2xl p-8 border border-white/10">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-12 h-12 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full flex items-center justify-center">
+                <span class="text-white font-bold">M</span>
+              </div>
+              <div>
+                <h4 class="text-white font-semibold">Maria Rodriguez</h4>
+                <p class="text-slate-400 text-sm">Journalist</p>
+              </div>
+            </div>
+            <p class="text-slate-300 italic">
+              "TruthLens helped me identify subtle bias patterns I was missing in my research. The emotional tone analysis is incredibly accurate."
+            </p>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="bg-slate-800/50 rounded-2xl p-8 border border-white/10">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full flex items-center justify-center">
+                <span class="text-white font-bold">D</span>
+              </div>
+              <div>
+                <h4 class="text-white font-semibold">Dr. James Chen</h4>
+                <p class="text-slate-400 text-sm">Media Researcher</p>
+              </div>
+            </div>
+            <p class="text-slate-300 italic">
+              "The AI detection capabilities are remarkable. TruthLens caught AI-generated content that other tools missed completely."
+            </p>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="bg-slate-800/50 rounded-2xl p-8 border border-white/10">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-12 h-12 bg-gradient-to-r from-green-400 to-teal-500 rounded-full flex items-center justify-center">
+                <span class="text-white font-bold">S</span>
+              </div>
+              <div>
+                <h4 class="text-white font-semibold">Sarah Thompson</h4>
+                <p class="text-slate-400 text-sm">Educator</p>
+              </div>
+            </div>
+            <p class="text-slate-300 italic">
+              "Clara makes complex analysis accessible to my students. They love asking questions and getting instant, clear explanations."
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Voice AI Demo Section -->
-    <section ref="demoSection" class="py-20 px-4 bg-gradient-to-r from-slate-900/50 to-slate-800/50">
-      <div class="max-w-6xl mx-auto text-center">
-        <h2 class="text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
-          Meet Alex, Your Voice AI Assistant
-        </h2>
-        <p class="text-xl text-slate-300 mb-12 max-w-3xl mx-auto">
-          Experience the future of news analysis with real-time voice conversations. 
-          Alex understands context, speaks multiple languages, and provides instant insights.
-        </p>
-
-        <!-- Voice Assistant Demo -->
-        <div class="relative max-w-2xl mx-auto">
-          <!-- Demo Voice Button -->
-          <div class="voice-demo-container mb-8">
-            <div class="voice-demo-disc">
-              <div class="demo-gradient"></div>
-              <div class="demo-shine"></div>
-            </div>
-            <button class="voice-demo-button" @click="playDemoAudio">
-              <div class="demo-icon">
-                <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 14.142M8 21l4-4H5a2 2 0 01-2-2V9a2 2 0 012-2h7l4-4v18z" />
-                </svg>
-              </div>
-              <span class="demo-text">Try Voice Demo</span>
-            </button>
-          </div>
-
-          <!-- Demo Features -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-            <div class="p-6 bg-slate-800/30 rounded-xl border border-cyan-400/20">
-              <div class="w-12 h-12 bg-cyan-400/20 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h3 class="text-lg font-semibold text-white mb-2">Natural Speech</h3>
-              <p class="text-slate-300 text-sm">Speak naturally and get human-like responses</p>
-            </div>
-
-            <div class="p-6 bg-slate-800/30 rounded-xl border border-cyan-400/20">
-              <div class="w-12 h-12 bg-cyan-400/20 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 class="text-lg font-semibold text-white mb-2">Instant Response</h3>
-              <p class="text-slate-300 text-sm">Low-latency processing for real-time conversations</p>
-            </div>
-
-            <div class="p-6 bg-slate-800/30 rounded-xl border border-cyan-400/20">
-              <div class="w-12 h-12 bg-cyan-400/20 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
-                </svg>
-              </div>
-              <h3 class="text-lg font-semibold text-white mb-2">Multilingual</h3>
-              <p class="text-slate-300 text-sm">Responds in your preferred language automatically</p>
+    <!-- Meet Clara Section -->
+    <section class="py-20 px-4 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="mb-12">
+          <!-- Clara Avatar -->
+          <div class="w-32 h-32 mx-auto mb-8 relative">
+            <div class="absolute inset-0 bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 rounded-full animate-pulse"></div>
+            <div class="absolute inset-2 bg-slate-900 rounded-full flex items-center justify-center">
+              <svg class="w-16 h-16 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 14.142M8 21l4-4H5a2 2 0 01-2-2V9a2 2 0 012-2h7l4-4v18z" />
+              </svg>
             </div>
           </div>
+
+          <h2 class="text-5xl font-bold mb-6 bg-gradient-to-r from-purple-300 via-pink-400 to-cyan-300 bg-clip-text text-transparent">
+            Meet Clara – Voice of TruthLens
+          </h2>
+          
+          <blockquote class="text-2xl text-slate-300 italic mb-8 max-w-3xl mx-auto">
+            "Clara speaks. Clara explains. Clara helps you think for yourself."
+          </blockquote>
+
+          <p class="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
+            Clara is your intelligent voice companion, ready to discuss any analysis, answer your questions, and help you understand complex media patterns through natural conversation.
+          </p>
+
+          <button
+            @click="scrollToVoiceDemo"
+            class="group relative px-10 py-5 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl font-semibold text-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25"
+          >
+            <span class="relative z-10 flex items-center justify-center gap-3">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 14.142M8 21l4-4H5a2 2 0 01-2-2V9a2 2 0 012-2h7l4-4v18z" />
+              </svg>
+              Talk to Clara
+            </span>
+            <div class="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-400 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </button>
         </div>
       </div>
     </section>
@@ -244,7 +373,7 @@
             How It Works
           </h2>
           <p class="text-xl text-slate-300 max-w-3xl mx-auto">
-            Simple, powerful, and intelligent. Get insights in three easy steps.
+            Three simple steps to uncover the truth behind any content
           </p>
         </div>
 
@@ -257,9 +386,9 @@
               </div>
               <div class="absolute top-1/2 left-full w-full h-0.5 bg-gradient-to-r from-cyan-400/50 to-transparent hidden md:block"></div>
             </div>
-            <h3 class="text-2xl font-bold mb-4 text-white">Input Content</h3>
+            <h3 class="text-2xl font-bold mb-4 text-white">Paste Content</h3>
             <p class="text-slate-300 leading-relaxed">
-              Paste your news article or speak directly to Alex. Our AI processes text and voice input seamlessly.
+              Paste a news article, upload an image, or speak directly to Clara. Our AI processes all types of media content.
             </p>
           </div>
 
@@ -273,7 +402,7 @@
             </div>
             <h3 class="text-2xl font-bold mb-4 text-white">AI Analysis</h3>
             <p class="text-slate-300 leading-relaxed">
-              Advanced algorithms analyze bias, credibility, emotional tone, and factual accuracy in real-time.
+              TruthLens analyzes bias, tone, and accuracy using advanced AI. Get detailed insights in seconds.
             </p>
           </div>
 
@@ -284,89 +413,126 @@
                 <span class="text-2xl font-bold text-white">3</span>
               </div>
             </div>
-            <h3 class="text-2xl font-bold mb-4 text-white">Get Insights</h3>
+            <h3 class="text-2xl font-bold mb-4 text-white">Get Structured Results</h3>
             <p class="text-slate-300 leading-relaxed">
-              Receive detailed reports and recommendations. Ask follow-up questions through voice or text chat.
+              Receive clear recommendations and detailed breakdowns. Ask Clara for explanations and deeper insights.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CTA Section -->
+    <!-- Final Call to Action -->
     <section class="py-20 px-4 bg-gradient-to-r from-cyan-900/20 to-blue-900/20">
       <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
-          Ready to Analyze?
+        <h2 class="text-6xl font-bold mb-8 bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
+          Truth is just one lens away.
         </h2>
-        <p class="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-          Join thousands of users who trust TruthLens for accurate news analysis and bias detection.
-        </p>
         
         <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
           <RouterLink
             to="/analyze"
-            class="group relative px-10 py-5 bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-xl font-semibold text-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/25 min-w-[250px]"
+            class="group relative px-12 py-6 bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-xl font-semibold text-2xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/25 min-w-[300px]"
           >
-            <span class="relative z-10 flex items-center justify-center gap-2">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <span class="relative z-10 flex items-center justify-center gap-3">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
               Start Analyzing Now
             </span>
             <div class="absolute inset-0 bg-gradient-to-r from-cyan-300 to-blue-400 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </RouterLink>
-          
-          <RouterLink
-            to="/translator"
-            class="group px-10 py-5 border-2 border-cyan-400/50 text-cyan-300 rounded-xl font-semibold text-xl transition-all duration-300 hover:border-cyan-400 hover:bg-cyan-400/10 hover:scale-105 min-w-[250px]"
-          >
-            <span class="flex items-center justify-center gap-2">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
-              </svg>
-              Try Translator Pro
-            </span>
-          </RouterLink>
         </div>
       </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 px-4 border-t border-white/10">
+    <footer class="py-16 px-4 border-t border-white/10 bg-slate-900/50">
       <div class="max-w-6xl mx-auto">
-        <div class="flex flex-col md:flex-row justify-between items-center">
-          <div class="flex items-center space-x-3 mb-4 md:mb-0">
-            <img
-              src="../assets/logo.png"
-              alt="TruthLens Logo"
-              class="h-8 w-auto"
-            />
-            <span class="text-xl font-bold text-white">TruthLens</span>
+        <!-- Main Footer Content -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <!-- Brand Section -->
+          <div class="space-y-4">
+            <div class="flex items-center space-x-3">
+              <img
+                src="../assets/logo.png"
+                alt="TruthLens Logo"
+                class="h-10 w-auto"
+              />
+              <span class="text-2xl font-bold text-white">TruthLens</span>
+            </div>
+            <p class="text-slate-300 leading-relaxed">
+              AI-powered media analysis platform helping you navigate the complex world of modern information.
+            </p>
           </div>
-          
-          <div class="flex items-center space-x-6">
-            <RouterLink to="/analyze" class="text-slate-300 hover:text-white transition-colors">
-              Analyze
-            </RouterLink>
-            <RouterLink to="/translator" class="text-slate-300 hover:text-white transition-colors">
-              Translator
-            </RouterLink>
-            <a href="https://truthlens-backend-production.up.railway.app/docs" target="_blank" class="text-slate-300 hover:text-white transition-colors">
-              API Docs
-            </a>
+
+          <!-- Quick Links -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold text-white">Quick Links</h3>
+            <div class="space-y-2">
+              <RouterLink to="/analyze" class="block text-slate-300 hover:text-cyan-400 transition-colors">
+                Text Analyzer
+              </RouterLink>
+              <RouterLink to="/translator" class="block text-slate-300 hover:text-cyan-400 transition-colors">
+                Translator Pro
+              </RouterLink>
+              <a href="https://truthlens-backend-production.up.railway.app/docs" target="_blank" class="block text-slate-300 hover:text-cyan-400 transition-colors">
+                API Documentation
+              </a>
+            </div>
           </div>
-          
-          <div class="flex items-center space-x-4 mt-4 md:mt-0">
-            <a href="https://bolt.new" target="_blank" rel="noopener noreferrer"
-              class="flex items-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 text-white text-sm font-medium hover:opacity-90 transition-opacity">
-              <span>Made with Bolt</span>
-            </a>
+
+          <!-- Connect Section -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold text-white">Connect</h3>
+            <div class="space-y-3">
+              <a 
+                href="https://github.com/ignaciozuniga/truthlens" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="flex items-center gap-3 text-slate-300 hover:text-cyan-400 transition-colors group"
+              >
+                <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                <span>View on GitHub</span>
+              </a>
+              <a 
+                href="https://bolt.new" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="flex items-center gap-3 text-slate-300 hover:text-cyan-400 transition-colors group"
+              >
+                <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <span>Built with Bolt</span>
+              </a>
+            </div>
           </div>
         </div>
-        
+
+        <!-- Credits Section -->
+        <div class="border-t border-white/10 pt-8">
+          <div class="text-center space-y-4">
+            <p class="text-slate-300">
+              <strong>Built with:</strong> Bolt, FastAPI, GPT-4, and ElevenLabs
+            </p>
+            <p class="text-slate-300">
+              <strong>Solo project by:</strong> <span class="text-cyan-400 font-semibold">Ignacio Zúñiga</span>
+            </p>
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-400/10 to-blue-500/10 rounded-full border border-cyan-400/20">
+              <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+              </svg>
+              <span class="text-cyan-400 font-medium">Created for the World's Largest Hackathon by Bolt</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Copyright -->
         <div class="mt-8 pt-8 border-t border-white/10 text-center text-slate-400">
-          <p>&copy; 2024 TruthLens. Powered by advanced AI technology.</p>
+          <p>&copy; 2024 TruthLens. Empowering critical thinking through AI.</p>
         </div>
       </div>
     </footer>
@@ -378,6 +544,15 @@ import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 
 const demoSection = ref<HTMLElement | null>(null);
+const demoText = ref('');
+const isDemoRunning = ref(false);
+const showDemoResults = ref(false);
+
+const demoResults = ref({
+  bias: 73,
+  credibility: 45,
+  emotion: 'Alarmist'
+});
 
 const scrollToDemo = () => {
   if (demoSection.value) {
@@ -385,9 +560,28 @@ const scrollToDemo = () => {
   }
 };
 
-const playDemoAudio = () => {
-  // Demo functionality - could play a sample audio or show a modal
-  alert('Voice demo would play here! Click "Start Analyzing" to try the real voice assistant.');
+const scrollToVoiceDemo = () => {
+  // This would scroll to voice demo or navigate to voice feature
+  alert('Voice demo would be activated here! Try the "Start Analyzing" button to access Clara.');
+};
+
+const runDemo = async () => {
+  if (!demoText.value.trim()) return;
+  
+  isDemoRunning.value = true;
+  
+  // Simulate analysis
+  await new Promise(resolve => setTimeout(resolve, 2000));
+  
+  // Generate random but realistic results
+  demoResults.value = {
+    bias: Math.floor(Math.random() * 40) + 60, // 60-100%
+    credibility: Math.floor(Math.random() * 60) + 20, // 20-80%
+    emotion: ['Alarmist', 'Emotional', 'Neutral', 'Sensational'][Math.floor(Math.random() * 4)]
+  };
+  
+  isDemoRunning.value = false;
+  showDemoResults.value = true;
 };
 </script>
 
@@ -418,10 +612,6 @@ const playDemoAudio = () => {
   animation-delay: 400ms;
 }
 
-.delay-600 {
-  animation-delay: 600ms;
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -442,122 +632,26 @@ const playDemoAudio = () => {
   }
 }
 
-/* Voice Demo Styles */
-.voice-demo-container {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Custom scrollbar */
+.overflow-y-auto {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.3) transparent;
 }
 
-.voice-demo-disc {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  overflow: hidden;
+.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
 }
 
-.demo-gradient {
-  position: absolute;
-  inset: 0;
-  background: conic-gradient(
-    from 0deg,
-    #1e40af 0deg,
-    #3b82f6 60deg,
-    #06b6d4 120deg,
-    #0ea5e9 180deg,
-    #3b82f6 240deg,
-    #1e40af 300deg,
-    #1e40af 360deg
-  );
-  border-radius: 50%;
-  animation: rotate 8s linear infinite;
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.demo-shine {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at 30% 30%,
-    rgba(255, 255, 255, 0.3) 0%,
-    rgba(255, 255, 255, 0.1) 30%,
-    transparent 70%
-  );
-  border-radius: 50%;
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.3);
+  border-radius: 3px;
 }
 
-.voice-demo-button {
-  position: relative;
-  z-index: 10;
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  background: rgba(15, 23, 42, 0.95);
-  border: 2px solid rgba(59, 130, 246, 0.3);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(10px);
-  box-shadow: 
-    0 0 30px rgba(59, 130, 246, 0.2),
-    inset 0 2px 4px rgba(255, 255, 255, 0.1);
-}
-
-.voice-demo-button:hover {
-  transform: scale(1.05);
-  border-color: rgba(59, 130, 246, 0.5);
-  box-shadow: 
-    0 0 40px rgba(59, 130, 246, 0.3),
-    inset 0 2px 4px rgba(255, 255, 255, 0.15);
-}
-
-.demo-icon {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.demo-text {
-  font-size: 0.875rem;
-  font-weight: 500;
-  text-align: center;
-  line-height: 1.2;
-}
-
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .voice-demo-container {
-    width: 160px;
-    height: 160px;
-  }
-  
-  .voice-demo-button {
-    width: 120px;
-    height: 120px;
-  }
-  
-  .demo-icon {
-    width: 28px;
-    height: 28px;
-  }
-  
-  .demo-text {
-    font-size: 0.75rem;
-  }
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(148, 163, 184, 0.5);
 }
 </style>
