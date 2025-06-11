@@ -6,7 +6,8 @@ import { RouterLink } from 'vue-router';
 const showHelp = ref(false);
 
 const links = [
-  { name: 'Analyze', href: '/' },
+  { name: 'Home', href: '/' },
+  { name: 'Analyze', href: '/analyze' },
   { name: 'Translator Pro', href: '/translator' },
   { name: 'Docs', href: 'https://truthlens-backend-production.up.railway.app/docs', external: true }
 ];
@@ -21,11 +22,13 @@ const toggleHelp = () => {
     <nav class="mx-auto px-4 sm:px-6 lg:px-8">
       <div class="my-4 px-4 h-8 rounded-full flex items-center justify-between shadow-sm">
         <div class="flex items-center space-x-3">
-          <img
-            src="../assets/logo.png"
-            alt="TruthLens Logo"
-            class="h-8 w-auto object-contain"
-          />
+          <RouterLink to="/" class="flex items-center space-x-3">
+            <img
+              src="../assets/logo.png"
+              alt="TruthLens Logo"
+              class="h-8 w-auto object-contain"
+            />
+          </RouterLink>
         </div>
 
         <div class="flex items-center space-x-6">
